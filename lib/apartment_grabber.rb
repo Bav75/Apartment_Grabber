@@ -1,8 +1,8 @@
-require "apartment_grabber/version"
+require_relative "../config/environment"
 
-module ApartmentGrabber
-  class Error < StandardError; end
-  
+# module ApartmentGrabber
+#   class Error < StandardError; end
   
 
-end
+
+# end
