@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "apartment_grabber"
+
+
+ApartmentGrabber::CLI.new.run
