@@ -44,11 +44,6 @@ class ApartmentGrabber::CLI
 
         #finalize custom url 
         custom_url += "&availabilityMode=0&sale_date=all+dates"
-
-
-        custom_url
-
-
     end
 
 end
