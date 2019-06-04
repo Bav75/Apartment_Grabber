@@ -1,6 +1,6 @@
 # ApartmentGrabber
 
-Apartment Grabber is a test gem being designed as part of the Flatiron School curriculum. This gem invovles scraping the Zillow website for apartment rental listings for educational purposes. 
+Apartment Grabber is a test gem being designed as part of the Flatiron School curriculum. This gem invovles scraping Craiglist for apartment rental listings for educational purposes. 
 
 ## Installation
 

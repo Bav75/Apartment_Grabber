@@ -4,4 +4,7 @@ require "bundler/setup"
 require "./lib/apartment_grabber"
 
 
+#start Apartment Grabber and welcome the user / ask for apartment specs
 ApartmentGrabber::CLI.new.run
+
+#get apartment specs and create custom url 
