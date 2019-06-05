@@ -31,5 +31,19 @@ class ApartmentGrabber::Apartment
         @@all.detect {|apartment| apartment.title == title}
     end
 
+    def self.print_all
+        @@all.each.with_index(1) do |apartment, index|
+            doc = <<-HEREDOC
+
+            #{index}. #{apartment.title}
+                price = #{apartment.price}
+                bedrooms = #{apartment.bedrooms}
+                neighborhood = #{apartment.neighborhood}
+                
+            HEREDOC
+            puts doc
+        end
+    end
+
 
 end

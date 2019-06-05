@@ -13,7 +13,7 @@ class ApartmentGrabber::CLI
         puts "Please provide responses below for your desired apartment specifications."
         @scraper = ApartmentGrabber::Scraper.new(build_url)
         @scraper.scrape_apartments
-        binding.pry
+        ApartmentGrabber::Apartment.print_all
     end
 
     def build_url

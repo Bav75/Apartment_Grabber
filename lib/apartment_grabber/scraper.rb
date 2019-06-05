@@ -14,7 +14,11 @@ class ApartmentGrabber::Scraper
         page = Nokogiri::HTML(open(@url))
         listings = page.search("ul.rows li.result-row")
 
-        next_page_url = page.search("div.paginator.buttongroup span.buttons a.button.next").attr("href").text
+        begin
+            next_page_url = page.search("div.paginator.buttongroup span.buttons a.button.next").attr("href").text
+        rescue NoMethodError
+            next_page_url = false 
+        end
 
         listings.each do |listing|
             title = listing.search("p.result-info a.result-title").text.strip.downcase.gsub(/[?.!,;]?$/, "")
@@ -50,9 +54,9 @@ class ApartmentGrabber::Scraper
         end
     end
 
-    # def scrape_apartment_details(apartment)
+    def scrape_apartment_details(apartment)
 
-    # end
+    end
 
     def self.all
         @@all
