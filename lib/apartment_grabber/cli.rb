@@ -2,7 +2,7 @@
 
 class ApartmentGrabber::CLI
 
-    attr_accessor :saved_search
+    # attr_accessor :saved_search
 
     #saved searches that lets you easily edit, modify what you have searched for 
 
@@ -19,24 +19,38 @@ class ApartmentGrabber::CLI
 
         # puts "Which apartment would you like additional details on?"
         # user_input = gets.strip.to_i
-        
+
+        help
         user_input = ""
         # while user_input != "exit"
         while user_input
-            puts "Which apartment would you like additional details on (enter number)?"
-            selection = ApartmentGrabber::Apartment.find_by_index(gets.strip.to_i)
+            user_input = gets.strip 
+            case user_input
+            when "list"
+                ApartmentGrabber::Apartment.print_all
+            when "favorites"
+                @user.print_apartment_details
+            when "help"
+                help
+            when "exit"
+                exit
+                break
+            else
+            # puts "Which apartment would you like additional details on (enter number)?"
+                selection = ApartmentGrabber::Apartment.find_by_index(user_input.to_i)
+                @scraper.scrape_apartment_details(selection.url)
+                selection.print_details
 
-            @scraper.scrape_apartment_details(selection.url)
-            selection.print_details
-
-            puts "would you like to add this apartment to your favorites?"
-            user_input = gets.strip.downcase
-            if user_input == "yes"
-                @user.favorites << selection
+                puts "would you like to add this apartment to your favorites (enter yes / no)?"
+                user_input = gets.strip.downcase
+                if user_input == "yes"
+                    @user.add_favorite(selection)
+                end
+                help
             end
-
-
-
+            # puts "Please enter a command:"
+            # user_input = gets.strip.downcase
+            # case user_input
         end
 
     end
@@ -76,16 +90,20 @@ class ApartmentGrabber::CLI
 
     def help
         doc = <<-HELP
-      ApartmentGrabber accepts the following commands:
+      Please enter the number of the apartment listing you are interested in 
+      receiving more details for.
+      
+      If you need further assistance, ApartmentGrabber accepts the following list of commands:
       - help : displays this help message
       - list : displays a list of all apartments matching your specifications
+      - favorites : displays a list of your favorite apartments
       - exit : exits the program
       HELP
         puts doc
       end
 
-      def exit
+    def exit
         puts "Thanks for using ApartmentGrabber!"
-      end
+    end
 
 end

@@ -56,7 +56,7 @@ class ApartmentGrabber::Scraper
     def scrape_apartment_details(apartment_url)
         page = Nokogiri::HTML(open(apartment_url))
         apartment = ApartmentGrabber::Apartment.find_by_url(apartment_url)
-        apartment.description = page.search("section#postingbody").text
+        apartment.description = page.search("section#postingbody").text.gsub("QR Code Link to This Post", "")
 
         apartment_attributes = page.search("div.mapAndAttrs p.attrgroup span")
         apartment_attributes.each do |attribute|

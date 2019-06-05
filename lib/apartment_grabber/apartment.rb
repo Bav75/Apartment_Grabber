@@ -26,6 +26,10 @@ class ApartmentGrabber::Apartment
         @@all << self 
     end
 
+    def favorites
+        ApartmentGrabber::Favorite.all.select {|favorite| favorite.apartment == self}
+    end
+
     def self.all
         @@all
     end
