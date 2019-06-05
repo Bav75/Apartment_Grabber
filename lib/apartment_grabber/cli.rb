@@ -12,6 +12,7 @@ class ApartmentGrabber::CLI
         ApartmentGrabber::User.create(gets.strip)
         puts "Please provide responses below for your desired apartment specifications."
         @scraper = ApartmentGrabber::Scraper.new(build_url)
+        @scraper.scrape_apartments
         binding.pry
     end
 
@@ -29,8 +30,9 @@ class ApartmentGrabber::CLI
         puts "Enter maximum monthly rent (enter number):"
         max_rent = gets.strip.to_i
 
-        base_url = "https://sfbay.craigslist.org/search/sfc/apa?hasPic=1&bundleDuplicates=1"
-        custom_url = base_url + "&max_bedrooms=#{bedrooms}&max_bathrooms=#{bathrooms}&min_price=#{min_rent}&max_price=#{max_rent}"
+        # base_url = "https://sfbay.craigslist.org/search/sfc/apa?hasPic=1&bundleDuplicates=1"
+        base_url = "https://sfbay.craigslist.org/search/sfc/apa?hasPic=1"
+        custom_url = base_url + "&min_bedrooms=#{bedrooms}&min_bathrooms=#{bathrooms}&min_price=#{min_rent}&max_price=#{max_rent}"
 
         puts "Do you have specific requirements for apartment sqft (enter yes / no)? :"
         sqft_response = gets.strip.downcase
