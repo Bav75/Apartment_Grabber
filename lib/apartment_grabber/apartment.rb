@@ -1,6 +1,6 @@
 class ApartmentGrabber::Apartment
 
-    attr_accessor :title, :url, :price, :neighborhood
+    attr_accessor :title, :url, :price, :neighborhood, :bedrooms
 
     @@all = []
 
