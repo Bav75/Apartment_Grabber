@@ -9,11 +9,36 @@ class ApartmentGrabber::CLI
     def run
         puts "Welcome to Apartment Grabber!"
         puts "Please enter your full name."
-        ApartmentGrabber::User.create(gets.strip)
+        @user = ApartmentGrabber::User.create(gets.strip)
+
         puts "Please provide responses below for your desired apartment specifications."
         @scraper = ApartmentGrabber::Scraper.new(build_url)
+
         @scraper.scrape_apartments
         ApartmentGrabber::Apartment.print_all
+
+        # puts "Which apartment would you like additional details on?"
+        # user_input = gets.strip.to_i
+        
+        user_input = ""
+        # while user_input != "exit"
+        while user_input
+            puts "Which apartment would you like additional details on (enter number)?"
+            selection = ApartmentGrabber::Apartment.find_by_index(gets.strip.to_i)
+
+            @scraper.scrape_apartment_details(selection.url)
+            selection.print_details
+
+            puts "would you like to add this apartment to your favorites?"
+            user_input = gets.strip.downcase
+            if user_input == "yes"
+                @user.favorites << selection
+            end
+
+
+
+        end
+
     end
 
     def build_url
@@ -47,5 +72,20 @@ class ApartmentGrabber::CLI
         #finalize custom url 
         custom_url += "&availabilityMode=0&sale_date=all+dates"
     end
+
+
+    def help
+        doc = <<-HELP
+      ApartmentGrabber accepts the following commands:
+      - help : displays this help message
+      - list : displays a list of all apartments matching your specifications
+      - exit : exits the program
+      HELP
+        puts doc
+      end
+
+      def exit
+        puts "Thanks for using ApartmentGrabber!"
+      end
 
 end
