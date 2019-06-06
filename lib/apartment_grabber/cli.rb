@@ -2,10 +2,6 @@
 
 class ApartmentGrabber::CLI
 
-    # attr_accessor :saved_search
-
-    #saved searches that lets you easily edit, modify what you have searched for 
-
     def run
         puts "Welcome to Apartment Grabber!"
         puts "Please enter your full name."
@@ -17,12 +13,8 @@ class ApartmentGrabber::CLI
         @scraper.scrape_apartments
         ApartmentGrabber::Apartment.print_all
 
-        # puts "Which apartment would you like additional details on?"
-        # user_input = gets.strip.to_i
-
         help
         user_input = ""
-        # while user_input != "exit"
         while user_input
             user_input = gets.strip 
             case user_input
@@ -36,7 +28,6 @@ class ApartmentGrabber::CLI
                 exit
                 break
             else
-            # puts "Which apartment would you like additional details on (enter number)?"
                 selection = ApartmentGrabber::Apartment.find_by_index(user_input.to_i)
                 @scraper.scrape_apartment_details(selection.url)
                 selection.print_details
@@ -48,17 +39,11 @@ class ApartmentGrabber::CLI
                 end
                 help
             end
-            # puts "Please enter a command:"
-            # user_input = gets.strip.downcase
-            # case user_input
         end
 
     end
 
     def build_url
-        #walk the user through their desired apartment specs, collect the input, build the custom URL.
-
-        # specs = []
         puts "How many bedrooms (enter number)? :"
         bedrooms = gets.strip.to_i
         puts "How many baths (enter number)? :"
@@ -82,7 +67,6 @@ class ApartmentGrabber::CLI
             max_sqft = gets.strip.to_i
             custom_url += "&minSqft=#{min_sqft}&maxSqft=#{max_sqft}"
         end
-
         #finalize custom url 
         custom_url += "&availabilityMode=0&sale_date=all+dates"
     end

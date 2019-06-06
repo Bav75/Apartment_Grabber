@@ -1,6 +1,6 @@
 class ApartmentGrabber::Apartment
 
-    attr_accessor :title, :url, :price, :neighborhood, :bedrooms, :baths, :availability, :amenities, :description
+    attr_accessor :title, :url, :price, :sqft, :neighborhood, :bedrooms, :baths, :availability, :amenities, :description
  
     @@all = []
 
@@ -13,6 +13,7 @@ class ApartmentGrabber::Apartment
         doc = <<-HEREDOC
         title = #{self.title}
         price = #{self.price}
+        sqft = #{self.sqft}
         bedrooms = #{self.bedrooms}
         baths = #{self.baths}
         neighborhood = #{self.neighborhood}
@@ -40,6 +41,35 @@ class ApartmentGrabber::Apartment
         end
     end
 
+    # def self.create_and_populate_details_from_listing(listing)
+    #     title = listing.search("p.result-info a.result-title").text.strip.downcase.gsub(/[?.!,;]?$/, "")
+    #     unless self.find_by_title(title)
+    #         apartment = self.create(title)
+    #         apartment.url = listing.search("a").attr("href").text
+    #         apartment.sqft = (listing.search("span.housing").text.strip.split("\n")[1].strip.gsub("ft2 -", "").to_i != "") ? (listing.search("span.housing").text.strip.split("\n")[1].strip.gsub("ft2 -", "").to_i) : "Not available"
+    #         apartment.price = listing.search("p span.result-price").text.split("$").uniq.join("$")
+    #         apartment.neighborhood = (listing.search("p span.result-hood").text.downcase.strip != "") ? (listing.search("p span.result-hood").text.downcase.strip) : (listing.search("p span.nearby").text.downcase.strip)
+    #         apartment.bedrooms = listing.search("p span.housing").text.strip.gsub("br", "").gsub(" -", "").to_i
+    #     end
+    # end
+
+    def self.create_and_populate_details_from_listing(listing)
+        title = listing.search("p.result-info a.result-title").text.strip.downcase.gsub(/[?.!,;]?$/, "")
+        unless self.find_by_title(title)
+            apartment = self.create(title)
+            apartment.url = listing.search("a").attr("href").text
+            begin
+                apartment.sqft = listing.search("span.housing").text.strip.split("\n")[1].strip.gsub("ft2 -", "").to_i # != "") ? (listing.search("span.housing").text.strip.split("\n")[1].strip.gsub("ft2 -", "").to_i) : "Not available"
+            rescue NoMethodError
+                apartment.sqft = "Not available"
+            ensure
+                apartment.price = listing.search("p span.result-price").text.split("$").uniq.join("$")
+                apartment.neighborhood = (listing.search("p span.result-hood").text.downcase.strip != "") ? (listing.search("p span.result-hood").text.downcase.strip) : (listing.search("p span.nearby").text.downcase.strip)
+                apartment.bedrooms = listing.search("p span.housing").text.strip.gsub("br", "").gsub(" -", "").to_i
+            end
+        end
+    end
+
     def self.find_by_title(title)
         @@all.detect {|apartment| apartment.title == title}
     end
@@ -58,6 +88,7 @@ class ApartmentGrabber::Apartment
 
             #{index}. #{apartment.title}
                 price = #{apartment.price}
+                sqft = #{apartment.sqft}
                 bedrooms = #{apartment.bedrooms}
                 neighborhood = #{apartment.neighborhood}
 
