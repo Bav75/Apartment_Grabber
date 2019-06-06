@@ -2,14 +2,12 @@
 
 class ApartmentGrabber::User
 
-    attr_accessor :name, :favorites
+    attr_accessor :name
 
     @@all = []
 
     def initialize(name)
         @name = name
-        @favorites = []
-
     end
 
     def add_favorite(apartment)

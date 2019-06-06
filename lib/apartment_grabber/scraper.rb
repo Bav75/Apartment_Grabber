@@ -21,15 +21,6 @@ class ApartmentGrabber::Scraper
 
         listings.each do |listing|
             ApartmentGrabber::Apartment.create_and_populate_details_from_listing(listing)
-            # title = listing.search("p.result-info a.result-title").text.strip.downcase.gsub(/[?.!,;]?$/, "")
-            # # break this out as a separate method 
-            # unless ApartmentGrabber::Apartment.find_by_title(title)
-            #     apartment = ApartmentGrabber::Apartment.create(title)
-            #     apartment.url = listing.search("a").attr("href").text
-            #     apartment.price = listing.search("p span.result-price").text.split("$").uniq.join("$")
-            #     apartment.neighborhood = listing.search("p span.result-hood").text.downcase.strip
-            #     apartment.bedrooms = listing.search("p span.housing").text.strip.gsub("br", "").gsub(" -", "").to_i
-            # end
         end
 
         while next_page_url
@@ -38,14 +29,6 @@ class ApartmentGrabber::Scraper
             next_page_listings = next_page_content.search("ul.rows li.result-row")
             next_page_listings.each do |listing|
                 ApartmentGrabber::Apartment.create_and_populate_details_from_listing(listing)
-                # title = listing.search("p.result-info a.result-title").text.strip.downcase.gsub(/[?.!,;]?$/, "")
-                # unless ApartmentGrabber::Apartment.find_by_title(title)
-                #     apartment = ApartmentGrabber::Apartment.create(title)
-                #     apartment.url = listing.search("a").attr("href").text
-                #     apartment.price = listing.search("p span.result-price").text.split("$").uniq.join("$")
-                #     apartment.neighborhood = listing.search("p span.result-hood").text.downcase.strip
-                #     apartment.bedrooms = listing.search("p span.housing").text.strip.gsub("br", "").gsub(" -", "").to_i
-                # end
             end
 
             begin
@@ -71,7 +54,6 @@ class ApartmentGrabber::Scraper
                 apartment.amenities << attribute.text
             end
         end
-        # binding.pry 
     end
 
     def self.all

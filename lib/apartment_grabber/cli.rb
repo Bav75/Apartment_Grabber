@@ -1,17 +1,18 @@
-
-
 class ApartmentGrabber::CLI
 
-    def run
-        puts "Welcome to Apartment Grabber!"
-        puts "Please enter your full name."
-        @user = ApartmentGrabber::User.create(gets.strip)
+    attr_accessor :user, :scraper
 
-        puts "Please provide responses below for your desired apartment specifications."
-        @scraper = ApartmentGrabber::Scraper.new(build_url)
+    def run
+        welcome
+        get_user_specs
+
+        # puts "Please provide responses below for your desired apartment specifications."
+        # @scraper = ApartmentGrabber::Scraper.new(build_url)
 
         @scraper.scrape_apartments
-        ApartmentGrabber::Apartment.print_all
+        show_listings
+
+        # ApartmentGrabber::Apartment.print_all
 
         help
         user_input = ""
@@ -54,7 +55,6 @@ class ApartmentGrabber::CLI
         puts "Enter maximum monthly rent (enter number):"
         max_rent = gets.strip.to_i
 
-        # base_url = "https://sfbay.craigslist.org/search/sfc/apa?hasPic=1&bundleDuplicates=1"
         base_url = "https://sfbay.craigslist.org/search/sfc/apa?hasPic=1"
         custom_url = base_url + "&min_bedrooms=#{bedrooms}&min_bathrooms=#{bathrooms}&min_price=#{min_rent}&max_price=#{max_rent}"
 
@@ -67,7 +67,6 @@ class ApartmentGrabber::CLI
             max_sqft = gets.strip.to_i
             custom_url += "&minSqft=#{min_sqft}&maxSqft=#{max_sqft}"
         end
-        #finalize custom url 
         custom_url += "&availabilityMode=0&sale_date=all+dates"
     end
 
@@ -88,6 +87,28 @@ class ApartmentGrabber::CLI
 
     def exit
         puts "Thanks for using ApartmentGrabber!"
+    end
+
+    def welcome
+        puts "Welcome to Apartment Grabber!"
+        puts "Please enter your full name."
+        @user = ApartmentGrabber::User.create(gets.strip)
+    end
+
+    def get_user_specs
+        puts "Please provide responses below for your desired apartment specifications."
+        @scraper = ApartmentGrabber::Scraper.new(build_url)
+    end
+
+    def show_listings
+        puts "Search resulted in #{ApartmentGrabber::Apartment.all.count} results."
+        puts "How many listings would you like to see (enter number or type all)?"
+        user_input = gets.strip.downcase
+        user_input == "all" ? ApartmentGrabber::Apartment.print_all : ApartmentGrabber::Apartment.print_amount(user_input.to_i)
+    end
+
+    def switch_user
+
     end
 
 end
