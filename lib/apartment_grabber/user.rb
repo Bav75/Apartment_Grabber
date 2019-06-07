@@ -21,6 +21,7 @@ class ApartmentGrabber::User
     end
 
     def print_apartment_details
+        puts "Below are your #{apartments.count} favorite apartment listings:"
         apartments.each do |apartment|
             apartment.print_details
         end

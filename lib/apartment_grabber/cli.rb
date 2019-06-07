@@ -86,6 +86,7 @@ class ApartmentGrabber::CLI
                 show_listings
             when "favorites"
                 @user.print_apartment_details
+                help
             when "help"
                 help
             when "logout"
