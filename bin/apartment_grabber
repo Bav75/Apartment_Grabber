@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "./lib/apartment_grabber"
+require_relative "../lib/apartment_grabber"
 
 
-#start Apartment Grabber and welcome the user / ask for apartment specs
-ApartmentGrabber::CLI.new.run
+CLI = ApartmentGrabber::CLI.new
+CLI.run
 
-#get apartment specs and create custom url 

@@ -103,6 +103,7 @@ class ApartmentGrabber::CLI
                 run
                 break
             when "modify"
+                @scraper = nil 
                 get_user_specs
                 @scraper.scrape_apartments
                 show_listings
