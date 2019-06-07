@@ -104,6 +104,4 @@ class ApartmentGrabber::Apartment
             puts doc
         end
     end
-
-
 end

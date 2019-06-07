@@ -1,5 +1,3 @@
-
-
 class ApartmentGrabber::User
 
     attr_accessor :name
@@ -42,6 +40,11 @@ class ApartmentGrabber::User
         end
     end
 
+    def self.find_by_name(name)
+        @@all.detect {|user| user.name.downcase == name.downcase}
+    end
 
-
+    def self.print_all_users
+        @@all.each.with_index(1) {|user, index| puts ("#{index}. #{user.name}")}
+    end
 end
