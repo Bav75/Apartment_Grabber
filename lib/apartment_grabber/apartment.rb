@@ -18,9 +18,9 @@ class ApartmentGrabber::Apartment
         baths = #{self.baths}
         neighborhood = #{self.neighborhood}
         amenities = #{self.amenities}
-        description = #{self.description}
         HEREDOC
-        puts doc
+        puts Rainbow(doc).cyan
+        puts Rainbow("description = #{self.description}").white
     end
 
     def save
@@ -78,11 +78,11 @@ class ApartmentGrabber::Apartment
         @@all.each.with_index(1) do |apartment, index|
             doc = <<-HEREDOC
 
-            #{index}. #{apartment.title}
-            price = #{apartment.price}
-            sqft = #{apartment.sqft}
-            bedrooms = #{apartment.bedrooms}
-            neighborhood = #{apartment.neighborhood}
+            #{Rainbow("#{index}. #{apartment.title}").cyan.underline}
+            #{Rainbow("price = #{apartment.price}").white}
+            #{Rainbow("sqft = #{apartment.sqft}").white}
+            #{Rainbow("bedrooms = #{apartment.bedrooms}").white}
+            #{Rainbow("neighborhood = #{apartment.neighborhood}").white}
 
             HEREDOC
             puts doc
@@ -94,11 +94,11 @@ class ApartmentGrabber::Apartment
         list.each.with_index(1) do |apartment, index|
             doc = <<-HEREDOC
 
-            #{index}. #{apartment.title}
-            price = #{apartment.price}
-            sqft = #{apartment.sqft}
-            bedrooms = #{apartment.bedrooms}
-            neighborhood = #{apartment.neighborhood}
+            #{Rainbow("#{index}. #{apartment.title}").cyan.underline}
+            #{Rainbow("price = #{apartment.price}").white}
+            #{Rainbow("sqft = #{apartment.sqft}").white}
+            #{Rainbow("bedrooms = #{apartment.bedrooms}").white}
+            #{Rainbow("neighborhood = #{apartment.neighborhood}").white}
 
             HEREDOC
             puts doc

@@ -21,7 +21,7 @@ class ApartmentGrabber::User
     end
 
     def print_apartment_details
-        puts "Below are your #{apartments.count} favorite apartment listings:"
+        puts Rainbow("Below are your #{apartments.count} favorite apartment listings:").cyan.underline
         apartments.each do |apartment|
             apartment.print_details
         end
@@ -46,6 +46,6 @@ class ApartmentGrabber::User
     end
 
     def self.print_all_users
-        @@all.each.with_index(1) {|user, index| puts ("#{index}. #{user.name}")}
+        @@all.each.with_index(1) {|user, index| puts (Rainbow("#{index}. #{user.name}").magenta)}
     end
 end
