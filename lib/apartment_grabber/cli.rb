@@ -84,6 +84,7 @@ class ApartmentGrabber::CLI
             case user_input
             when "list"
                 show_listings
+                help
             when "favorites"
                 @user.print_apartment_details
                 help
@@ -91,6 +92,7 @@ class ApartmentGrabber::CLI
                 help
             when "logout"
                 @user = nil
+                @scraper = nil
                 run
                 break
             when "users"
