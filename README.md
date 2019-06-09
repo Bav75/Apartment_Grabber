@@ -4,19 +4,13 @@ ApartmentGrabber is a test gem being designed as part of the Flatiron School cur
 
 ## Installation
 
-Add this line to your application's Gemfile:
+After cloning the repo, install the dependencies by executing the below command: 
 
-```ruby
-gem 'apartment_grabber'
-```
+$ bundle install
 
-And then execute:
+Execute the interface using the below command:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install apartment_grabber
+$ ./bin/apartment_grabber 
 
 ## Usage
 
