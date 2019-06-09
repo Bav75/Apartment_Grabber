@@ -1,6 +1,6 @@
 # ApartmentGrabber
 
-Apartment Grabber is a test gem being designed as part of the Flatiron School curriculum. This gem invovles scraping Craiglist for apartment rental listings for educational purposes. 
+ApartmentGrabber is a test gem being designed as part of the Flatiron School curriculum. This gem invovles scraping Craiglist for apartment rental listings for educational purposes. 
 
 ## Installation
 
@@ -20,7 +20,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+ApartmentGrabber is a command line interface for accessing Craiglist
+apartment listings in the San Francisco Bay Area. 
+
+Upon starting up the program, the user will be prompted for their name which will create a new user object. Users will then be prompted to input
+their desired specifications for apartments and will receive a prompt asking for how many listings they'd like to see. 
+
+From here, the user has a number of options at their disposal:
+- Enter the number of a listing to access additional details 
+- help : displays a help message with instructions on accepted inputs 
+- list : displays a list of apartments matching your specifications (either a specific # of listings or all listings)
+- favorites : displays a list of your favorite apartments
+- modify : allows you to modify your search specifications
+- users: displays a list of all active users 
+- switch: prompts the user to select which user to switch to and restarts ApartmentGrabber
+- logout: logs out current user and prompts new user to login
+- exit : exits the program
+
 
 ## Development
 

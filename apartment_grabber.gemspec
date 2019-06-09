@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Brian Velez"]
   spec.email         = ["bvez94@gmail.com"]
 
-  spec.summary       = %q{Apartment Grabber is a test gem, designed to scrape the Zillow website and grab apartment rental listings.}
-  spec.description   = %q{Apartment Grabber is a test gem, designed to scrape the Zillow website and grab apartment rental listings.}
+  spec.summary       = %q{Apartment Grabber is a test gem, designed to scrape Craigslist and grab apartment rental listings.}
+  spec.description   = %q{Apartment Grabber is a test gem, designed to scrape Craigslist and grab apartment rental listings.}
   spec.homepage      = "https://github.com/Bav75/Apartment_Grabber"
   spec.license       = "MIT"
 
