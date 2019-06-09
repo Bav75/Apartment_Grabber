@@ -60,9 +60,13 @@ class ApartmentGrabber::CLI
     end
 
     def welcome
-        puts Rainbow("Welcome to Apartment Grabber!").magenta
-        puts Rainbow("Please enter your full name.").magenta
-        @user != nil ? @user : (@user = ApartmentGrabber::User.create(gets.strip))
+        if @user != nil 
+            puts Rainbow("Welcome back to Apartment Grabber #{@user.name}!").magenta
+        else
+            puts Rainbow("Welcome to Apartment Grabber!").magenta
+            puts Rainbow("Please enter your full name.").magenta
+            @user = ApartmentGrabber::User.create(gets.strip)
+        end
     end
 
     def get_user_specs
